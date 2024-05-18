@@ -3,14 +3,18 @@ import './style.css';
 
 interface IWordboxProp {
   word: string;
+  onFinish: () => void;
 }
 
-const Wordbox : React.FC<IWordboxProp> = ({ word }) => {
+const Wordbox : React.FC<IWordboxProp> = ({ word, onFinish }) => {
   const [lettersLeft, setLetterLeft] = useState<string>(word);
   
   const handleKeyUp = (e: KeyboardEvent) => {
     if (e.key === lettersLeft[0]) {
       setLetterLeft(lettersLeft.substring(1))
+      if (lettersLeft.substring(1).length === 0) {
+        onFinish()
+      }
     }
   }
   useEffect(() => {
