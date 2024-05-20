@@ -5,11 +5,12 @@ interface IWordboxProp {
   word: string;
   onFinish: () => void;
   active: boolean;
+  onMistake: () => void;
 }
 
-const Wordbox : React.FC<IWordboxProp> = ({ word, onFinish, active }) => {
-  const [lettersLeft, setLetterLeft] = useState<string>(word);
-  const [mistake, setMistake] = useState<boolean>(false);
+const Wordbox : React.FC<IWordboxProp> = ({ word, onFinish, active, onMistake }) => {
+  const [lettersLeft, setLetterLeft] = useState<string>(word)
+  const [mistake, setMistake] = useState<boolean>(false)
   
   const handleKeyUp = (e: KeyboardEvent) => {
     if (e.key === lettersLeft[0]) {
@@ -20,6 +21,7 @@ const Wordbox : React.FC<IWordboxProp> = ({ word, onFinish, active }) => {
       }
     } else {
       setMistake(true)
+      onMistake()
     }
   }
   useEffect(() => {
@@ -29,7 +31,7 @@ const Wordbox : React.FC<IWordboxProp> = ({ word, onFinish, active }) => {
             window.removeEventListener('keyup', handleKeyUp)
           }
     }
-  }, [lettersLeft, active])
+  }, [lettersLeft, active, onMistake])
   
   return (
     <div className={mistake ? "wordbox wordbox--mistake" : "wordbox"}>{lettersLeft}</div>
