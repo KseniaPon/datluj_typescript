@@ -1,14 +1,34 @@
 .stage {
-  height: 340px;
-  padding: 32px;
-  margin: 32px auto;
-  background-color: #efefef;
-  border-radius: 8px;
+  height: 25rem;
+  padding: 3rem auto;
+  margin: 3rem auto;
+  background-color: #dfdfdf;
+  border-radius: 1rem;
+  
+}
+
+.stage__data {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding-bottom: 4rem;
+  padding-top: 2rem;
 }
 
 .stage__mistakes {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.stage__mistakes--over {
+  animation-name: flash;
+  animation-duration: 1s;
+  font-size: 3rem; 
+  background-color: rgb(177, 66, 112);
+  text-align: center;
+  padding-top: 8rem;
+  color: white;
 }
 
 .stage__words {
@@ -16,4 +36,58 @@
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
+  row-gap: 4rem;
+}
+
+.stage__win {
+  animation-name: flash;
+  animation-duration: 1s;
+  font-size: 3rem; 
+  background-color: rgb(125, 167, 121);
+  text-align: center;
+  padding-top: 8rem;
+  color: white;
+}
+
+@keyframes flip {
+  from {
+    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, -360deg);
+    animation-timing-function: ease-out;
+  }
+
+  40% {
+    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)
+      rotate3d(0, 1, 0, -190deg);
+    animation-timing-function: ease-out;
+  }
+
+  50% {
+    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)
+      rotate3d(0, 1, 0, -170deg);
+    animation-timing-function: ease-in;
+  }
+
+  80% {
+    transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, 0deg);
+    animation-timing-function: ease-in;
+  }
+
+  to {
+    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);
+    animation-timing-function: ease-in;
+  }
+}
+
+@keyframes flash {
+  from,
+  50%,
+  to {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 0;
+  }
 }
